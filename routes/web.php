@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\IndexController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SymbolController;
 
 /*
@@ -19,5 +19,12 @@ use App\Http\Controllers\SymbolController;
 //     return view('welcome');
 // });
 
-Route::get('/', [IndexController::class, 'showIndex']);
-Route::post('/transaction-detail', [SymbolController::class, 'getTransactionDetail']);
+// Route::get('/', [IndexController::class, 'showIndex']);
+Route::post('/transaction', [SymbolController::class, 'getTransaction'])->name('transaction');
+
+Auth::routes();
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// マイページ
+Route::get('/myPage', 'App\Http\Controllers\myPageController@myPage')->name('myPage')->middleware('verified');

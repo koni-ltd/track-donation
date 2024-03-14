@@ -16,6 +16,12 @@ class SymbolController extends Controller
 
     public function getTransaction(Request $request)
     {
+        $request->validate([
+            'user_id' => 'required|integer',
+            // 文字と数字のみを許可し、大文字小文字を区別しない
+            'hash' => 'required|alpha_num',
+        ]);
+
         $userId = $request->input('user_id');
         $hash = $request->input('hash');
 

@@ -23,11 +23,11 @@
                     <div class="card-body p-4 p-lg-5">
                         <p class="fs-1 fw-bold mb-4">Organization</p>
 
-                        {{-- <div class="table-responsive"> --}}
+                        <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th scope="col" class="text-nowrap">Organization Name</th>
+                                        <th scope="col" class="">Organization Name</th>
                                         {{-- <th scope="col" class="text-nowrap">Node</th> --}}
                                         {{-- <th scope="col" class="text-nowrap">Symbol Address</th> --}}
                                         <th scope="col" class="text-nowrap">Description</th>
@@ -35,7 +35,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{-- コントローラーから渡された$usersをループして表示 --}}
                                     @foreach ($users as $user)
                                         <tr>
                                             <td class="align-middle">{{ $user->name }}</td>
@@ -68,8 +67,8 @@
                                                                         <div class="fw-bold mb-2">1. Walletから寄付をする</div>
                                                                         <div class="row g-3 align-items-center">
                                                                             <div class="col-auto">
-                                                                                <label class="col-form-label">Symbol
-                                                                                    Address</label>
+                                                                                <label class="col-form-label">Organization
+                                                                                    Symbol Address</label>
                                                                             </div>
                                                                             <div class="col">
                                                                                 <input class="form-control" type="text"
@@ -88,7 +87,7 @@
                                                                             <div class="col">
                                                                                 <input type="text" class="form-control"
                                                                                     name="hash"
-                                                                                    placeholder="トランザクションハッシュを入力">
+                                                                                    placeholder="トランザクションハッシュを入力してください">
                                                                             </div>
                                                                             <div class="col-auto">
                                                                                 <button type="submit"
@@ -110,7 +109,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                        {{-- </div> --}}
+                        </div>
                     </div>
                 </div>
             </div>

@@ -17,8 +17,7 @@ class SymbolController extends Controller
     public function getTransaction(Request $request)
     {
         $userId = $request->input('user_id');
-        // $hash = $request->input('hash'); // テストのためコメントアウト
-        $hash = '701A694597919E2DED6640B54FEEEBDF2A4DDB7AA1DD3D0B418AC8B1DA00717C';
+        $hash = $request->input('hash');
 
         // ユーザーIDを使用してユーザー情報を取得
         $user = User::find($userId);
@@ -26,8 +25,7 @@ class SymbolController extends Controller
             return redirect()->back()->withErrors(['error' => 'User not found.']);
         }
 
-        // $node = $user->node; // テストのためコメントアウト
-        $node = 'https://symbol01.node.oe-jpy.com:3001';
+        $node = $user->node;
 
         // APIエンドポイント
         $url = $node . '/transactions/confirmed/' . $hash;

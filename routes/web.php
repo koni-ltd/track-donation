@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SymbolController;
+use App\Http\Controllers\Auth\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,12 +20,10 @@ use App\Http\Controllers\SymbolController;
 //     return view('welcome');
 // });
 
-// Route::get('/', [IndexController::class, 'showIndex']);
 Route::post('/transaction', [SymbolController::class, 'getTransaction'])->name('transaction');
-
-Auth::routes();
-
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// マイページ
-Route::get('/myPage', 'App\Http\Controllers\myPageController@myPage')->name('myPage')->middleware('verified');
+Auth::routes();
+Route::get('/account', [UserController::class, 'index'])->middleware('auth')->name('account');
+Route::put('/account/update', [UserController::class, 'update'])->middleware('auth')->name('account.update');
+Route::delete('/account/destroy', [UserController::class, 'destroy'])->middleware('auth')->name('account.destroy');

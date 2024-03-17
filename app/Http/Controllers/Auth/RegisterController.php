@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -52,9 +54,9 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'node' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'max:255'],
+            'image' => ['nullable', 'image', 'max:2048'],
         ]);
     }
 
@@ -66,13 +68,23 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $imagePath = null;
+        if (isset($data['image'])) {
+            // 'public/users'ディレクトリに画像を保存し、そのパスを取得
+            $imagePath = $data['image']->store('public/users');
+
+            // storageパスからURLへのパスを作成（DBに保存する形式）
+            $imagePath = 'storage/users/' . basename($imagePath);
+        }
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'node' => $data['node'],
+            'node' => '',
             'address' => $data['address'],
             'description' => $data['description'],
+            'image' => $imagePath,
         ]);
     }
 }

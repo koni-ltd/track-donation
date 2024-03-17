@@ -20,9 +20,8 @@
                             @endforeach
                         @endif
 
-
-                        <div class=" mb-4">
-                            <p class="fs-1 fw-bold mb-0">寄付先団体</p>
+                        <div class="text-center mb-5">
+                            <p class="fs-1 fw-bold mb-0">寄付先団体一覧</p>
                             <p class=""><a class="" href="{{ route('register') }}">団体登録はこちら</a></p>
                         </div>
 
@@ -39,6 +38,7 @@
                                         @endif
                                         <div class="card-body">
                                             <h5 class="card-title fw-bold">{{ $user->name }}</h5>
+                                            <p class="card-text mb-1"><small class="text-body-secondary">{{ $user->category->name ?? '未設定' }}</small></p>
                                             <p class="card-text">{{ $user->description }}</p>
                                         </div>
                                         <div class="card-footer bg-white border-top-0">

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SymbolController;
 use App\Http\Controllers\Auth\UserController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,5 @@ Auth::routes();
 Route::get('/account', [UserController::class, 'index'])->middleware('auth')->name('account');
 Route::put('/account/update', [UserController::class, 'update'])->middleware('auth')->name('account.update');
 Route::delete('/account/destroy', [UserController::class, 'destroy'])->middleware('auth')->name('account.destroy');
+Route::get('/register', [RegisterController::class, 'showRegisterForm'])->name('register');
+Route::post('/register', [RegisterController::class, 'register']);

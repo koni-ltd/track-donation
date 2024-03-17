@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -15,7 +16,9 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        return view('auth/account', compact('user'));
+        $categories = Category::all();
+
+        return view('auth/account', compact('user'), ['categories' => $categories]);
     }
 
     public function update(Request $request)
@@ -29,6 +32,7 @@ class UserController extends Controller
             'address' => 'required|string|max:255',
             'description' => 'required|string|max:255',
             'image' => 'nullable|image|max:2048',
+            'category_id' => ['nullable', 'integer', 'exists:categories,id'],
         ]);
 
         if ($request->hasFile('image')) {
@@ -50,6 +54,7 @@ class UserController extends Controller
         }
         $user->address = $request->address;
         $user->description = $request->description;
+        $user->category_id = $request->category_id;
 
         $user->save();
 

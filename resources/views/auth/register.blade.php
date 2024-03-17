@@ -90,6 +90,25 @@
                         </div>
 
                         <div class="row mb-3">
+                            <label for="category_id" class="col-md-4 col-form-label text-md-end">Category</label>
+
+                            <div class="col-md-6">
+                                <select class="form-select" name="category_id">
+                                    <option selected>カテゴリ選択</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+
+                                @error('category_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
                             <label for="description" class="col-md-4 col-form-label text-md-end">Description</label>
 
                             <div class="col-md-6">

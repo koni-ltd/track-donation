@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -57,6 +58,7 @@ class RegisterController extends Controller
             'address' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'max:255'],
             'image' => ['nullable', 'image', 'max:2048'],
+            'category_id' => ['nullable', 'integer', 'exists:categories,id'],
         ]);
     }
 
@@ -85,6 +87,16 @@ class RegisterController extends Controller
             'address' => $data['address'],
             'description' => $data['description'],
             'image' => $imagePath,
+            'category_id' => $data['category_id'],
+        ]);
+    }
+
+    protected function showRegisterForm()
+    {
+        $categories = Category::all();
+
+        return view('auth.register', [
+            'categories' => $categories
         ]);
     }
 }

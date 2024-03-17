@@ -12,6 +12,11 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -25,6 +30,7 @@ class User extends Authenticatable
         'address',
         'description',
         'image',
+        'category_id',
     ];
 
     /**

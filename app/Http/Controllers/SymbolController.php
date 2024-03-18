@@ -27,7 +27,7 @@ class SymbolController extends Controller
         // ユーザーIDを使用してユーザー情報を取得
         $user = User::find($userId);
         if (!$user) {
-            return redirect('home')->with('error', 'ユーザーが見つかりません。');
+            return redirect()->route('home')->with('error', 'ユーザーが見つかりません。');
         }
 
         // APIエンドポイント
@@ -76,15 +76,15 @@ class SymbolController extends Controller
                     ]);
                 } catch (\Exception $e) {
                     // エラーが発生した場合、エラーメッセージを返す
-                    return redirect('home')->with('error', 'トランザクションの取得に失敗しました。');
+                    return redirect()->route('home')->with('error', 'トランザクションの取得に失敗しました。');
                 }
             } catch (\Exception $e) {
                 // エラーが発生した場合、エラーメッセージを返す
-                return redirect('home')->with('error', 'トランザクションの取得に失敗しました。');
+                return redirect()->route('home')->with('error', 'トランザクションの取得に失敗しました。');
             }
         } catch (\Exception $e) {
             // エラーが発生した場合、エラーメッセージを返す
-            return redirect('home')->with('error', 'トランザクションの取得に失敗しました。');
+            return redirect()->route('home')->with('error', 'トランザクションの取得に失敗しました。');
         }
     }
 

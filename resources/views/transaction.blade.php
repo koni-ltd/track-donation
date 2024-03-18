@@ -2,57 +2,55 @@
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-center g-3">
+        <div class="row justify-content-center g-5">
             <div class="col-12">
-                <div class="card">
-                    <div class="card-body p-4 p-lg-5">
-                        <div class=" mb-4">
-                            <p class="fs-1 fw-bold mb-4">トランザクション</p>
-                        </div>
+                <div class="neon-border p-4 p-lg-5">
+                    <div class="text-center mb-3 mb-lg-5">
+                        <p class="fs-1 fw-bold text-white">トランザクション</p>
+                    </div>
 
-                        <div class="table-responsive mb-4">
-                            <table class="table table-bordered">
-                                <thead class="table-dark">
-                                    <tr>
-                                        <th scope="col" class="text-nowrap">Organization Name</th>
-                                        <th scope="col" class="text-nowrap">Organization Symbol Address</th>
-                                        <th scope="col" class="text-nowrap">Balance</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="text-nowrap">{{ $user->name }}</td>
-                                        <td class="text-nowrap">{{ $user->address }}</td>
-                                        <td class="text-nowrap text-end">{{ $balance }} XYM</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <div class="table-responsive mb-4">
+                        <table class="table table-bordered">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th scope="col" class="text-nowrap">Organization Name</th>
+                                    <th scope="col" class="text-nowrap">Organization Symbol Address</th>
+                                    <th scope="col" class="text-nowrap">Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-nowrap">{{ $user->name }}</td>
+                                    <td class="text-nowrap">{{ $user->address }}</td>
+                                    <td class="text-nowrap text-end">{{ $balance }} XYM</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <div class="table-responsive">
-                            <table class="table table-bordered">
-                                <thead class="table-dark">
-                                    <tr>
-                                        <th scope="col">Date</th>
-                                        <th scope="col">Recipient Symbol Address</th>
-                                        <th scope="col">Type</th>
-                                        <th scope="col">Amount</th>
-                                        {{-- <th scope="col">Message</th> --}}
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Recipient Symbol Address</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Amount</th>
+                                    {{-- <th scope="col">Message</th> --}}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($transactionsList as $index => $transaction)
+                                    <tr class="{{ $transaction['cssClass'] }}">
+                                        <td class="text-nowrap">{{ $transaction['timestamp'] }}</td>
+                                        <td class="text-nowrap" id="address-{{ $index }}"></td>
+                                        <td class="text-nowrap">{{ $transaction['type'] }}</td>
+                                        <td class="text-nowrap text-end">{{ $transaction['amount'] }} XYM</td>
+                                        {{-- <td class="text-break">{{ $transaction['message'] }}</td> --}}
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($transactionsList as $index => $transaction)
-                                        <tr class="{{ $transaction['cssClass'] }}">
-                                            <td class="text-nowrap">{{ $transaction['timestamp'] }}</td>
-                                            <td class="text-nowrap" id="address-{{ $index }}"></td>
-                                            <td class="text-nowrap">{{ $transaction['type'] }}</td>
-                                            <td class="text-nowrap text-end">{{ $transaction['amount'] }} XYM</td>
-                                            {{-- <td class="text-break">{{ $transaction['message'] }}</td> --}}
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

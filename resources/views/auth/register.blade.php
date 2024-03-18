@@ -8,6 +8,14 @@
                 <div class="card-header">Organization Register</div>
 
                 <div class="card-body">
+                    @if ($errors->any())
+                        @foreach ($errors->all() as $error)
+                            <div class="alert alert-danger" role="alert">
+                                {{ $error }}
+                            </div>
+                        @endforeach
+                    @endif
+
                     <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
 
@@ -93,10 +101,10 @@
                             <label for="category_id" class="col-md-4 col-form-label text-md-end">Category</label>
 
                             <div class="col-md-6">
-                                <select class="form-select" name="category_id">
-                                    <option selected>カテゴリ選択</option>
+                                <select class="form-select" @error('category_id') is-invalid @enderror name="category_id">
+                                    <option value="">カテゴリ選択</option>
                                     @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                                     @endforeach
                                 </select>
 

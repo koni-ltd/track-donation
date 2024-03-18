@@ -58,7 +58,7 @@ class RegisterController extends Controller
             'address' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'max:255'],
             'image' => ['nullable', 'image', 'max:2048'],
-            'category_id' => ['nullable', 'integer', 'exists:categories,id'],
+            'category_id' => ['required', 'integer', 'exists:categories,id'],
         ]);
     }
 

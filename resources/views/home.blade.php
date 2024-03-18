@@ -13,7 +13,7 @@
                         寄付金がどのように使われているかを確認できることで、寄付金の流れを透明化します。
                     </p>
                     <div class="d-flex justify-content-center">
-                        <div class="border border-white p-4">
+                        <div class="text-start border border-white p-4">
                             <div class="fw-bold mb-1">1. Wallet から団体のアドレスへ寄付をする</div>
                             <div class="fw-bold">2. 発行されたトランザクションからハッシュを入力して追跡する</div>
                         </div>
@@ -43,7 +43,9 @@
 
                     <div class="text-center mb-3 mb-lg-5">
                         <p class="fs-1 fw-bold text-white mb-0">寄付先団体一覧</p>
-                        <p><a class="text-secondary" href="{{ route('register') }}">団体登録はこちら</a></p>
+                        @guest
+                            <p><a class="text-secondary" href="{{ route('register') }}">団体登録はこちら</a></p>
+                        @endguest
                     </div>
 
                     <div class="row row-cols-1 row-cols-lg-4 g-3">
